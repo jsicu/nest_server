@@ -12,7 +12,7 @@ export class AppService {
       code: 200,
       msg: 'OK',
       data: {
-        version: '0.0.1',
+        version: '0.0.2',
       },
     };
   }
