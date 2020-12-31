@@ -1,10 +1,14 @@
+/*
+ * @Author: linzq
+ * @Date: 2020-12-30 10:18:06
+ * @LastEditors: linzq
+ * @LastEditTime: 2020-12-31 17:02:08
+ * @Description:
+ */
 /**
  * @description 开发环境数据库配置
  */
 import { join } from 'path';
-
-const pwd = join(__dirname, '../');
-console.log(pwd + 'entity/**.entity{.ts,.js}');
 
 export default {
   type: 'mysql',
