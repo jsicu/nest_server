@@ -43,17 +43,14 @@ const formatText = {
     logText += 'response time: ' + resTime + '\n';
     return logText;
   },
-  response: function (ctx, resTime) {
+  response: function (request, response, resTime) {
     let logText = '';
     // 响应日志开始
-    logText +=
-      '\n' + '*************** response log start ***************' + '\n';
+    logText += '\n' + '*************** response log start ***************' + '\n';
     // 添加请求日志
-    logText += formatText.request(ctx.request, resTime);
-    // 响应状态码
-    logText += 'response status: ' + ctx.status + '\n';
+    logText += formatText.request(request, resTime);
     // 响应内容
-    logText += 'response body: ' + '\n    ' + JSON.stringify(ctx.body) + '\n';
+    logText += 'response body: ' + '\n    ' + JSON.stringify(response) + '\n';
     // 响应日志结束
     logText += '*************** response log end ***************' + '\n';
     return logText;
@@ -78,12 +75,12 @@ const formatText = {
     logText += '*************** info log end ***************' + '\n';
     return logText;
   },
-  error: function (ctx, err, resTime) {
+  error: function (ctx, err) {
     let logText = '';
     // 错误信息开始
     logText += '\n' + '*************** error log start ***************' + '\n';
     // 添加请求日志
-    logText += formatText.request(ctx.request, resTime);
+    logText += formatText.request(ctx, 0);
     // 错误名称
     logText += 'err name: ' + err.name + '\n';
     // 错误信息
@@ -104,11 +101,8 @@ export default {
   //   }
   // },
   // 封装响应日志
-  response: function (ctx) {
-    console.log(ctx)
-    // if (ctx) {
-    //   resLogger.info(formatText.response(ctx, resTime));
-    // }
+  info: function (request: object, response: any, resTime = 0) {
+    resLogger.info(formatText.response(request, response, resTime));
   },
   // 封装主动错误处理日志
   warn: function (res) {
@@ -118,10 +112,7 @@ export default {
     // }
   },
   // 封装错误日志
-  error: function (error) {
-    console.log(error);
-    // if ( error) {
-    //   errorLogger.error(formatText.error(ctx, error, resTime));
-    // }
+  error: (ctx: object, exception: object) => {
+    errorLogger.error(formatText.error(ctx, exception));
   },
 };

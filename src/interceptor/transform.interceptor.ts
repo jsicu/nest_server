@@ -2,8 +2,8 @@
  * @Author: linzq
  * @Date: 2020-12-31 14:41:45
  * @LastEditors: linzq
- * @LastEditTime: 2020-12-31 16:00:05
- * @Description: 
+ * @LastEditTime: 2021-01-04 18:53:06
+ * @Description:
  */
 
 import {
@@ -14,6 +14,8 @@ import {
 } from '@nestjs/common';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import log4js from 'src/utils/log4js';
+
 interface Response<T> {
   data: T;
 }
@@ -24,8 +26,12 @@ export class TransformInterceptor<T>
     context: ExecutionContext,
     next: CallHandler<T>,
   ): Observable<Response<T>> {
+    const ctx = context.switchToHttp();
+    const response = ctx.getResponse();
+    const request = ctx.getRequest();
     return next.handle().pipe(
       map((data) => {
+        log4js.info(request, data);
         return {
           data,
           code: 0,

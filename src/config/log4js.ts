@@ -2,7 +2,7 @@
  * @Author: linzq
  * @Date: 2020-12-31 16:23:19
  * @LastEditors: linzq
- * @LastEditTime: 2020-12-31 17:02:24
+ * @LastEditTime: 2021-01-04 14:06:58
  * @Description: log4js的配置文件
  */
 const path = require('path');
@@ -41,51 +41,55 @@ module.exports = {
     errorLogger: {
       type: 'dateFile',
       filename: errorLogPath,
-      pattern: '-yyyy-MM-dd.log',
+      pattern: 'yyyyMMdd.log',
       alwaysIncludePattern: true,
       encoding: 'utf-8',
       maxLogSize: 10485760,
       numBackups: 3,
       path: errorPath,
+      daysToKeep: 30,
     },
     resLogger: {
       type: 'dateFile',
       filename: responseLogPath,
-      pattern: '-yyyy-MM-dd.log',
+      pattern: 'yyyyMMdd.log',
       alwaysIncludePattern: true,
       encoding: 'utf-8',
       maxLogSize: 10485760, // 日志文件大小最大1M，单位字节
       numBackups: 3,
       path: responsePath,
+      daysToKeep: 30,
     },
     handleLogger: {
       type: 'dateFile',
       filename: handleLogPath,
-      pattern: '-yyyy-MM-dd.log',
+      pattern: 'yyyyMMdd.log',
       alwaysIncludePattern: true,
       encoding: 'utf-8',
       maxLogSize: 10485760,
       numBackups: 3,
       path: handlePath,
+      daysToKeep: 30,
     },
     consoleLogger: {
       type: 'dateFile',
       filename: consoleLoggerPath,
-      pattern: '-yyyy-MM-dd.log',
+      pattern: 'yyyyMMdd.log',
       alwaysIncludePattern: true,
       encoding: 'utf-8',
       maxLogSize: 10485760,
       numBackups: 3,
       path: consolePath,
+      daysToKeep: 30,
     },
   },
   // 供外部调用的名称和对应设置定义
   categories: {
-    default: { appenders: ['rule-console'], level: 'all' },
-    resLogger: { appenders: ['resLogger'], level: 'info' },
-    errorLogger: { appenders: ['errorLogger'], level: 'error' },
-    handleLogger: { appenders: ['handleLogger'], level: 'all' },
-    consoleLogger: { appenders: ['consoleLogger'], level: 'info' },
+    default: { appenders: ['rule-console'], level: 'ALL' },
+    resLogger: { appenders: ['resLogger'], level: 'INFO' },
+    errorLogger: { appenders: ['errorLogger'], level: 'ERROR' },
+    handleLogger: { appenders: ['handleLogger'], level: 'ALL' },
+    consoleLogger: { appenders: ['consoleLogger'], level: 'INFO' },
   },
   baseLogPath: baseLogPath,
 };

@@ -2,7 +2,7 @@
  * @Author: linzq
  * @Date: 2020-12-31 15:10:45
  * @LastEditors: linzq
- * @LastEditTime: 2020-12-31 17:29:14
+ * @LastEditTime: 2021-01-04 18:51:20
  * @Description: 统一请求错误返回体
  */
 
@@ -14,6 +14,7 @@ import {
   HttpStatus,
   Logger,
 } from '@nestjs/common';
+import log4js from 'src/utils/log4js';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -21,7 +22,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     const request = ctx.getRequest();
-    // console.log(exception.getStatus());
 
     const message = exception.message;
     Logger.log('错误提示', message);
@@ -35,9 +35,9 @@ export class HttpExceptionFilter implements ExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
     // 设置返回的状态码、请求头、发送错误信息
-    console.log(status);
     response.status(status);
     response.header('Content-Type', 'application/json; charset=utf-8');
     response.send(errorResponse);
+    log4js.error(request, exception);
   }
 }
