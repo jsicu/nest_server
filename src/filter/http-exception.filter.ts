@@ -2,7 +2,7 @@
  * @Author: linzq
  * @Date: 2020-12-31 15:10:45
  * @LastEditors: linzq
- * @LastEditTime: 2021-01-04 18:51:20
+ * @LastEditTime: 2021-01-05 17:15:39
  * @Description: 统一请求错误返回体
  */
 
@@ -22,7 +22,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     const request = ctx.getRequest();
-
+    console.log('报错了')
     const message = exception.message;
     Logger.log('错误提示', message);
     const errorResponse = {

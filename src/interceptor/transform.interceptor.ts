@@ -2,8 +2,8 @@
  * @Author: linzq
  * @Date: 2020-12-31 14:41:45
  * @LastEditors: linzq
- * @LastEditTime: 2021-01-04 18:53:06
- * @Description:
+ * @LastEditTime: 2021-01-05 09:35:10
+ * @Description: 统一封装请求返回
  */
 
 import {
