@@ -1,43 +1,55 @@
-/*
+/**
  * @Author: linzq
- * @Date: 2020-12-28 11:16:35
+ * @Date: 2021-05-17 20:14:37
  * @LastEditors: linzq
- * @LastEditTime: 2021-01-06 16:36:31
+ * @LastEditTime: 2021-05-18 22:49:51
  * @Description:
  */
-import { Module, RequestMethod, MiddlewareConsumer } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm'; // 引入数据库的及配置文件
-import { Connection } from 'typeorm';
-
+import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './routes/auth/auth.module';
-import { UserModule } from './routes/user/user.module';
-import { CatsModule } from './routes/cats/cats.module';
-import customConfig from './config';
+// import { DatabaseModule } from '/@/db/database.module';
+// import { modelProviders } from '/@/db/index.providers';
+import { SequelizeModule } from '@nestjs/sequelize';
+import * as models from '/@/db/models/index';
+import { user } from '/#model/user';
 
-// 中间件
-import { cryptoMiddleware } from './middleware/token.middleware';
-
-@Module({
-  imports: [
-    TypeOrmModule.forRoot({
-      ...customConfig,
-    }),
-    AuthModule,
-    UserModule,
-    // CatsModule,
-  ],
-  controllers: [AppController],
-  providers: [AppService],
-})
-export class AppModule {
-  constructor(private readonly connection: Connection) {}
-  configure(consumer: MiddlewareConsumer) {
-    // TODO: 鉴权可以实现
-    consumer;
-    // .apply(cryptoMiddleware) // 暂未使用
-    // .forRoutes({ path: '*', method: RequestMethod.ALL })
+// 导入所有模型
+const allModels = [];
+for (const key in models) {
+  if (Object.prototype.hasOwnProperty.call(models, key)) {
+    const element = models[key];
+    allModels.push(element);
   }
 }
+@Module({
+  imports: [
+    SequelizeModule.forFeature([user]),
+    // DatabaseModule,
+    SequelizeModule.forRoot({
+      dialect: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'password',
+      database: 'koa2_server',
+      models: allModels,
+      logging: true, // 关闭打印
+      // autoLoadModels: true,
+      // synchronize: true,
+      define: {
+        timestamps: true, // 是否自动创建时间字段， 默认会自动创建createdAt、updatedAt
+        paranoid: true, // 是否自动创建deletedAt字段
+        createdAt: 'createTime', // 重命名字段
+        updatedAt: 'updateTime',
+        deletedAt: 'deleteTime',
+        underscored: true, // 开启下划线命名方式，默认是驼峰命名
+        freezeTableName: true, // 禁止修改表名
+        charset: 'utf8mb4',
+      },
+    }),
+  ],
+  controllers: [AppController],
+  providers: [AppService], //modelProviders.userProviders
+})
+export class AppModule {}

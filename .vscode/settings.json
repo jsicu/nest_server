@@ -1,25 +1,9 @@
 {
-  "cSpell.ignoreWords": [
-    "age",
-    "api",
-    "bust",
-    "check",
-    "class",
-    "crypto",
-    "decrypt",
-    "export",
-    "get",
-    "implements",
-    "interface",
-    "name",
-    "private",
-    "public",
-    "public api interface crypto service get token decrypt check rsa export class implements name private readonly age bust waistline sex",
-    "readonly",
-    "rsa",
-    "service",
-    "sex",
-    "token",
-    "waistline"
+  "cSpell.words": [
+    "captchas",
+    "datetime",
+    "nestjs",
+    "typeorm",
+    "varchar"
   ]
 }

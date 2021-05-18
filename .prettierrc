@@ -1,5 +1,11 @@
 {
+  "eslintIntegration": true,
+  "trailingComma": "es5",
+  "stylelintIntegration": true,
+  "tabWidth": 2,
   "singleQuote": true,
-  "trailingComma": "all",
-  "endOfLine": "auto"
+  "semi": true,
+  "arrowParens": "avoid",
+  "endOfLine": "auto",
+  "printWidth": 120
 }

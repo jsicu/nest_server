@@ -1,0 +1,2 @@
+# 忽略eslint检查
+src/db/models
