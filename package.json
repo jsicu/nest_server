@@ -20,7 +20,6 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "model": "npx stg -D mysql -h localhost -p 3306 -d koa2_server -u root -x password -i -C camel -o ./models -c -m -a ./src/db/associations.csv",
-    "models": "npx stg -D mysql -h localhost -p 3306 -d koa2_server -u root -x password --indices --case camel --out-dir ./models --clean --associations-file ./src/db/associations.csv"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.15",

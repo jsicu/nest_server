@@ -2,12 +2,10 @@
  * @Author: linzq
  * @Date: 2021-05-17 20:14:37
  * @LastEditors: linzq
- * @LastEditTime: 2021-05-18 22:48:03
+ * @LastEditTime: 2021-05-18 22:55:56
  * @Description:
  */
 import { Injectable } from '@nestjs/common';
-// import * as Sequelize from 'sequelize'; // 引入 Sequelize 库
-// import sequelize from '/@/db/sequelize'; // 引入 Sequelize 实例
 import { InjectModel } from '@nestjs/sequelize';
 import { user } from '/#model/user';
 
