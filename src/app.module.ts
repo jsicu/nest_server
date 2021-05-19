@@ -2,17 +2,16 @@
  * @Author: linzq
  * @Date: 2021-05-17 20:14:37
  * @LastEditors: linzq
- * @LastEditTime: 2021-05-18 22:49:51
+ * @LastEditTime: 2021-05-19 15:09:58
  * @Description:
  */
-import { Module } from '@nestjs/common';
+import { Module, MiddlewareConsumer, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-// import { DatabaseModule } from '/@/db/database.module';
-// import { modelProviders } from '/@/db/index.providers';
 import { SequelizeModule } from '@nestjs/sequelize';
 import * as models from '/@/db/models/index';
 import { user } from '/#model/user';
+// import { LoggerMiddleware } from './common/middleware/logger.middleware';
 
 // 导入所有模型
 const allModels = [];
@@ -25,7 +24,6 @@ for (const key in models) {
 @Module({
   imports: [
     SequelizeModule.forFeature([user]),
-    // DatabaseModule,
     SequelizeModule.forRoot({
       dialect: 'mysql',
       host: 'localhost',
@@ -53,3 +51,9 @@ for (const key in models) {
   providers: [AppService], //modelProviders.userProviders
 })
 export class AppModule {}
+// export class AppModule implements NestModule {
+//   configure(consumer: MiddlewareConsumer) {
+//     // 为特定路添加中间件
+//     consumer.apply(LoggerMiddleware).forRoutes(AppController);
+//   }
+// }
