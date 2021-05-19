@@ -2,7 +2,7 @@
  * @Author: linzq
  * @Date: 2021-05-17 20:14:37
  * @LastEditors: linzq
- * @LastEditTime: 2021-05-18 22:55:56
+ * @LastEditTime: 2021-05-19 13:46:41
  * @Description:
  */
 import { Injectable } from '@nestjs/common';
@@ -67,13 +67,7 @@ export class AppService {
       // const res = await this.userModel.findAll({ where: { id: 1 } });
       const user = res; // 查出来的结果是一个数组，我们只取第一个。
       // const user = {}; // 查出来的结果是一个数组，我们只取第一个。
-      return {
-        code: 200, // 返回状态码，可自定义
-        data: {
-          user,
-        },
-        msg: 'Success',
-      };
+      return { user };
     } catch (error) {
       return {
         code: 503,
