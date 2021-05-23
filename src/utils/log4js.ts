@@ -2,7 +2,7 @@
  * @Author: linzq
  * @Date: 2021-05-19 14:20:15
  * @LastEditors: linzq
- * @LastEditTime: 2021-05-19 23:30:57
+ * @LastEditTime: 2021-05-21 14:13:31
  * @Description:
  */
 // src/utils/log4js.ts
@@ -42,8 +42,7 @@ const formatText = {
     logText += '*************** info log end ***************' + '\n';
     return logText;
   },
-  response: function (req: any, body: Object) {
-    console.log(req);
+  response: function (req: any, body: Record<string, unknown>) {
     let logText = '';
     // 响应日志开始
     logText += '*************** response log start ***************' + '\n';
@@ -55,7 +54,7 @@ const formatText = {
     logText += '*************** response log end ***************' + '\n';
     return logText;
   },
-  error: function (err: Object, ctx: any) {
+  error: function (err: Record<string, unknown>, ctx: any) {
     let logText = '';
     // 错误信息开始
     logText += '*************** error log start ***************' + '\n';
@@ -82,7 +81,7 @@ export class Logger {
    * @param any req
    * @param Object body
    */
-  static response(req: any, body: Object) {
+  static response(req: any, body: any) {
     const resLogger = Log4js.getLogger('resLogger');
     resLogger.info(Logger.getStackTrace(), formatText.response(req, body));
   }
@@ -92,7 +91,7 @@ export class Logger {
    * @param Object err 错误信息
    * @param any ctx 请求体
    */
-  static error(err: Object, ctx: any) {
+  static error(err: Record<string, unknown>, ctx: any) {
     const errorLogger = Log4js.getLogger('errorLogger');
     errorLogger.error(Logger.getStackTrace(), formatText.error(err, ctx));
   }
@@ -104,7 +103,7 @@ export class Logger {
   }
 
   // 日志追踪，可以追溯到哪个文件、第几行第几列
-  static getStackTrace(deep: number = 2): string {
+  static getStackTrace(deep = 2): string {
     const stackList: StackTrace.StackFrame[] = StackTrace.getSync();
     const stackInfo: StackTrace.StackFrame = stackList[deep];
 

@@ -1,2 +1,3 @@
 1:n, id, user_id, user, captcha
 1:n, id, user_id, user, online_token
+1:n, id, user_id, user, schedule

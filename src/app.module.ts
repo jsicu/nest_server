@@ -2,7 +2,7 @@
  * @Author: linzq
  * @Date: 2021-05-17 20:14:37
  * @LastEditors: linzq
- * @LastEditTime: 2021-05-19 15:09:58
+ * @LastEditTime: 2021-05-20 10:21:09
  * @Description:
  */
 import { Module, MiddlewareConsumer, NestModule } from '@nestjs/common';
@@ -12,6 +12,8 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import * as models from '/@/db/models/index';
 import { user } from '/#model/user';
 // import { LoggerMiddleware } from './common/middleware/logger.middleware';
+import { ScheduleService } from './modules/schedule/schedule.service';
+import { ScheduleModule } from './modules/schedule/schedule.module';
 
 // 导入所有模型
 const allModels = [];
@@ -35,20 +37,11 @@ for (const key in models) {
       logging: true, // 关闭打印
       // autoLoadModels: true,
       // synchronize: true,
-      define: {
-        timestamps: true, // 是否自动创建时间字段， 默认会自动创建createdAt、updatedAt
-        paranoid: true, // 是否自动创建deletedAt字段
-        createdAt: 'createTime', // 重命名字段
-        updatedAt: 'updateTime',
-        deletedAt: 'deleteTime',
-        underscored: true, // 开启下划线命名方式，默认是驼峰命名
-        freezeTableName: true, // 禁止修改表名
-        charset: 'utf8mb4',
-      },
     }),
+    ScheduleModule,
   ],
   controllers: [AppController],
-  providers: [AppService], //modelProviders.userProviders
+  providers: [AppService, ScheduleService],
 })
 export class AppModule {}
 // export class AppModule implements NestModule {
