@@ -2,7 +2,7 @@
  * @Author: linzq
  * @Date: 2021-05-19 11:13:07
  * @LastEditors: linzq
- * @LastEditTime: 2021-05-19 23:24:56
+ * @LastEditTime: 2021-05-25 21:23:31
  * @Description: 统一异常拦截器
  */
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
@@ -21,11 +21,10 @@ export class HttpExceptionFilter implements ExceptionFilter<HttpException> {
 
     response.status(status).json({
       code: 1,
-      timestamp: new Date().toISOString(),
-      path: request.url,
-      error,
-      status,
       message,
+      status,
+      error,
+      path: request.url,
     });
     // 打印错误日志
     Logger.error(exceptionRes, request);
