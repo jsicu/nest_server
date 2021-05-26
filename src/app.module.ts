@@ -2,7 +2,7 @@
  * @Author: linzq
  * @Date: 2021-05-17 20:14:37
  * @LastEditors: linzq
- * @LastEditTime: 2021-05-25 20:43:31
+ * @LastEditTime: 2021-05-25 23:43:02
  * @Description:
  */
 import { Module, MiddlewareConsumer, NestModule } from '@nestjs/common';
@@ -35,7 +35,7 @@ for (const key in models) {
       password: 'password',
       database: 'koa2_server',
       models: allModels,
-      logging: false, // 关闭打印
+      logging: true, // 关闭打印
       // autoLoadModels: true,
       // synchronize: true,
       define: {

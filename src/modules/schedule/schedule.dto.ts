@@ -2,38 +2,51 @@
  * @Author: linzq
  * @Date: 2021-05-25 20:35:26
  * @LastEditors: linzq
- * @LastEditTime: 2021-05-25 22:30:28
+ * @LastEditTime: 2021-05-27 00:00:02
  * @Description:
  */
 
-import { IsString, IsInt, MinLength, MaxLength } from 'class-validator';
-
+import { IsString, IsEmpty, IsOptional, IsUUID, IsNumberString, MinLength, MaxLength } from 'class-validator';
+// import { Replace } from 'validator/symbolReplace';
 // 任务筛选
 export class TaskDto {
-  @IsString({ message: '必须的字符类型' })
-  @MinLength(2, {
-    message: '长度不能小于2',
-  })
-  @MaxLength(10, {
-    message: '长度不能超过10',
-  })
-  name: string;
+  @IsOptional()
+  @IsNumberString()
+  readonly status?: string | number;
 
-  // @IsInt({ message: '必须的整数' })
-  // age: string;
+  @IsOptional()
+  @IsNumberString()
+  readonly type?: string | number;
+
+  @IsOptional()
+  @IsString({ message: '必须的字符串类型' })
+  @MaxLength(14, {
+    message: '简述不能多于14个字符',
+  })
+  readonly description?: string;
 }
 
 // 任务新增
 export class NewTaskDto {
-  @IsString({ message: '必须的字符类型' })
-  @MinLength(2, {
-    message: '长度不能小于2',
-  })
-  @MaxLength(10, {
-    message: '长度不能超过10',
-  })
-  name: string;
+  @IsString({ message: '必须的字符串类型' })
+  @IsUUID('all')
+  userId: string;
 
-  // @IsInt({ message: '必须的整数' })
-  // age: string;
+  @IsNumberString()
+  status: string | number;
+
+  @IsNumberString()
+  type: string | number;
+
+  @IsString({ message: '必须的字符串类型' })
+  @MaxLength(14, {
+    message: '简述不能多于14个字符',
+  })
+  description: string;
+
+  @IsNumberString()
+  completedNum: string | number;
+
+  @IsNumberString()
+  total: string | number;
 }

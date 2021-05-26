@@ -15,7 +15,8 @@
     "paths": {
       // 指定模块的路径，和baseUrl有关联，和webpack中resolve.alias配置一样
       "/@/*": ["src/*"],
-      "/#model/*": ["src/db/models/*"]
+      "/#model/*": ["src/db/models/*"],
+      "validator/*": ["src/common/validator/*"]
     }
   },
   "exclude": ["node_modules", "dist"]

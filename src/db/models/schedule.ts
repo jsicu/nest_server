@@ -2,7 +2,7 @@ import { Model, Table, Column, DataType, Index, Sequelize, ForeignKey, BelongsTo
 import { user } from "./user";
 
 interface scheduleAttributes {
-    id: number;
+    id: string;
     userId: string;
     status: number;
     type: number;
@@ -16,9 +16,9 @@ interface scheduleAttributes {
 
 @Table({ tableName: "schedule", timestamps: true })
 export class schedule extends Model<scheduleAttributes, scheduleAttributes> implements scheduleAttributes {
-    @Column({ primaryKey: true, type: DataType.INTEGER })
+    @Column({ primaryKey: true, type: DataType.STRING(64) })
     @Index({ name: "PRIMARY", using: "BTREE", order: "ASC", unique: true })
-    id!: number;
+    id!: string;
     @ForeignKey(() => user)
     @Column({ field: "user_id", type: DataType.STRING(64), comment: "\u7528\u6237id" })
     @Index({ name: "schedule_ibfk_1", using: "BTREE", order: "ASC", unique: false })
