@@ -2,8 +2,8 @@
  * @Author: linzq
  * @Date: 2021-05-26 23:43:43
  * @LastEditors: linzq
- * @LastEditTime: 2021-05-26 23:59:42
- * @Description: %_特殊符号替换
+ * @LastEditTime: 2021-05-27 22:04:20
+ * @Description: %_特殊符号替换(未使用)
  */
 import {
   registerDecorator,
