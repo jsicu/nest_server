@@ -2,7 +2,7 @@
  * @Author: linzq
  * @Date: 2021-05-20 10:19:17
  * @LastEditors: linzq
- * @LastEditTime: 2021-05-27 23:54:09
+ * @LastEditTime: 2021-05-29 17:04:38
  * @Description:
  */
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
@@ -39,14 +39,16 @@ export class ScheduleService {
       let handleObj = {};
       for (const key in obj) {
         if (key === 'funDescription' || key === 'completedIds') {
-          handleObj[key] = obj[key].split(',');
+          if (obj[key] === '' || obj[key] === null) {
+            handleObj[key] = [];
+          } else {
+            handleObj[key] = obj[key].split(',');
+          }
         }
       }
-      console.log(handleObj);
       handleObj = Object.assign({}, JSON.parse(JSON.stringify(obj)), handleObj);
       list.push(handleObj);
     }
-    console.log(list);
     return { list, total: count };
   }
 
