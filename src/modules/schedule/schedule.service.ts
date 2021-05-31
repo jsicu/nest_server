@@ -2,7 +2,7 @@
  * @Author: linzq
  * @Date: 2021-05-20 10:19:17
  * @LastEditors: linzq
- * @LastEditTime: 2021-05-29 17:04:38
+ * @LastEditTime: 2021-05-31 20:17:51
  * @Description:
  */
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
@@ -57,12 +57,13 @@ export class ScheduleService {
       ...taskObj,
       id: uuidv4(),
     };
-    try {
-      await this.scheduleModel.create(taskObj);
-      return true;
-    } catch (error) {
-      throw new HttpException(error, HttpStatus.BAD_REQUEST);
-    }
+    console.log(taskObj);
+    // try {
+    //   // await this.scheduleModel.create(taskObj);
+    return true;
+    // } catch (error) {
+    //   throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    // }
   }
   changeTask(): string {
     return 'Hello World!';
